@@ -29,24 +29,26 @@ input, button, textarea{
     --FS: clamp(1rem, 2.2vh, 1.5rem);
 
     /* COLORS */
-    --BGCOLOR: brown;
     --BGCOLOR-FADE: rgb(158, 93, 77);
+    --BGCOLOR: brown;
     --BGIMAGE: linear-gradient(to bottom, var(--BGCOLOR), var(--BGCOLOR-FADE));
     --BODY-BGCOLOR: #FFF;
-    --FONT-COLOR: #000;
     --BORDER_COLOR: #333;
-    --HIGHLIGHT-COLOR: rgb(136, 234, 193);
-    --LINK-COLOR: #000;
-    --LINK_HOVER: hsla(0,0%,0%,0.6);
-    --LINK-ACTIVE: brown;
+    --BUTTON-COLOR: #FFF;
+    --FONT-COLOR: #000;
     --HEADER-BGCOLOR: #000;
     --HEADER-COLOR: #FFF;
-    --NAV-BGCOLOR: #FFF;
     --HERO-BGCOLOR: rgba(136, 234, 193,0.75);
     --HERO-COLOR: #FFF;
+    --HIGHLIGHT-COLOR: rgb(136, 234, 193);
+    --LINK-ACTIVE: brown;
+    --LINK-COLOR: #000;
+    --LINK-HOVER: hsla(0,0%,0%,0.6);
+    --NAV-BGCOLOR: #FFF;
 
     /* BORDERS */
-    --BORDERS: 1px solid var(--BORDER_COLOR); 
+    --BORDERS: 1px solid var(--BORDER_COLOR);
+    --BORDER_RADIUS: 15px;
     
     /* STANDARD PADDING */
     --PADDING-TB: 0.25em;
@@ -54,6 +56,24 @@ input, button, textarea{
 
     /* STANDARD MARGIN */
     --MARGIN: clamp(1em, 2.5vh, 1.5em) 0;
+}
+
+@media (prefers-color-scheme: dark){
+    :root{
+        --BGCOLOR-FADE: gray;
+        --BGCOLOR: #000;
+        --BODY-BGCOLOR: #333;
+        --BORDER-COLOR: whitesmoke;
+        --BUTTON-COLOR: #000;
+        --FONT-COLOR: whitesmoke;
+        --HEADER_COLOR: whitesmoke;
+        --HERO-COLOR: #333;
+        --HIGHLIGHT-COLOR: whitesmoke;
+        --LINK-ACTIVE: rgb(194, 106, 39);
+        --LINK-COLOR: whitesmoke;
+        --LINK-HOVER: brown;
+        --NAV-BGCOLOR: rgb(20,20,20);
+    }
 }
 
 /* UTILITY CLASSES */
@@ -110,7 +130,7 @@ a:any-link{
 }
 
 a:hover, a:focus-visible{
-    color: var(--LINK_HOVER);
+    color: var(--LINK-HOVER);
 }
 
 a:active{
@@ -209,4 +229,126 @@ a:active{
 
 .main__article:last-child{
     min-height: calc(100vh - 20rem);
+}
+
+/* ABOUT */
+
+.about__trivia{
+    margin: var(--MARGIN);
+}
+
+.about__trivia-answer{
+    margin-top: 1em;
+}
+
+/* CONTACT */
+
+.contact__h2{
+    margin: 0;
+}
+
+.contact__fieldset{
+    border: none;
+}
+
+.contact__p{
+    margin: 1em 0;
+}
+
+.contact__label{
+    display: block;
+    font-weight: bold;
+}
+
+.contact__input, .contact__textarea{
+    padding: 0.5em;
+    border-radius: var(--BORDER_RADIUS);
+    border-width: 2px;
+    width: 100%;
+}
+
+.contact__button{
+    padding: 0.5em;
+    border-radius: var(--BORDER_RADIUS);
+    background-color: var(--HIGHLIGHT-COLOR);
+    color: var(--BUTTON-COLOR);
+    font-weight: bold;
+}
+
+/* MENU */
+
+thead, tbody, tfoot, tr{
+    display: contents;
+}
+
+.menu__container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-areas: 
+        "hd1 hd2 hd3"
+        "lt lt1 lt1p"
+        "lt lt2 lt2p"
+        "lt lt3 lt3p"
+        "cp cp1 cp1p"
+        "cp cp2 cp3p"
+        "cp cp3 cp2p"
+        "sj sj sj";
+    gap: 0.1em;
+    margin-bottom: 1em;
+}
+
+.menu__lt{
+    grid-area: lt;
+}
+
+.menu__cp{
+    grid-area: cp;
+}
+
+.menu__sj{
+    grid-area: sj;
+}
+
+.menu__lt, .menu__cp, .menu__sj, .menu__header{
+    color: var(--HIGHLIGHT-COLOR);
+    font-weight: bold;
+    height: 100%;
+    display: grid;
+    place-content: center;
+}
+
+
+.menu__header, .menu__item{
+    width: 100%;
+    padding: 1em;
+    border: medium ridge var(--BORDER_COLOR);
+}
+
+.menu__item{
+    display: grid;
+    place-content: center;
+}
+
+thead th:first-child {
+    border-top-left-radius: var(--BORDER_RADIUS);
+}
+thead th:last-child {
+    border-top-right-radius: var(--BORDER_RADIUS);
+}
+
+tfoot td{
+    border-bottom-left-radius: var(--BORDER_RADIUS);
+    border-bottom-right-radius: var(--BORDER_RADIUS);
+}
+
+@media screen and (min-width: 576px){
+    .header__h1::before{
+        content: '☕ ';
+    }
+    .header__h1::after{
+        content: ' ☕';
+    }
+    .menu__header, .menu__lt, .menu__cp, .menu__sj{
+        font-size: 125%;
+    }
 }
